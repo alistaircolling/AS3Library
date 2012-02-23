@@ -131,7 +131,14 @@ package utils
 			{
 				if (_currentCountIndex < _targetCountIndex)
 				{
-					_currentCountIndex += _countStep;
+					if ((_currentCountIndex + _countStep) <= _targetCountIndex)
+					{
+						_currentCountIndex += _countStep;
+					}
+					else
+					{
+						_currentCountIndex += (_targetCountIndex - _currentCountIndex);
+					}
 
 					// updateSignal.dispatch (_currentIndex);
 					dispatchEvent (new Event (COUNT_UPDATE));
@@ -145,7 +152,15 @@ package utils
 			{
 				if (_currentCountIndex > _targetCountIndex)
 				{
-					_currentCountIndex -= _countStep;
+					if ((_currentCountIndex - _countStep) >= _targetCountIndex)
+					{
+						_currentCountIndex -= _countStep;
+					}
+					else
+					{
+						_currentCountIndex -= (_currentCountIndex - _targetCountIndex);
+					}
+					
 
 					// updateSignal.dispatch (_currentIndex);
 					dispatchEvent (new Event (COUNT_UPDATE));
