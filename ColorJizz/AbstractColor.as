@@ -1,14 +1,4 @@
-package ColorJizz
-{
-	import ColorJizz.CIELab;
-	import ColorJizz.CIELCh;
-	import ColorJizz.CMY;
-	import ColorJizz.CMYK;
-	import ColorJizz.Hex;
-	import ColorJizz.HSV;
-	import ColorJizz.RGB;
-	import ColorJizz.XYZ;
-	import ColorJizz.Yxy;
+package ColorJizz {
 	/**
 	 * ...
 	 * @author Mikee

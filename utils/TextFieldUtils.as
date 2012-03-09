@@ -1,4 +1,5 @@
-package utils{
+package utils {
+	import org.robotlegs.mvcs.Actor;
 	import flash.text.AntiAliasType;
 	import flash.text.StyleSheet;
 	import flash.text.TextField;
@@ -8,39 +9,36 @@ package utils{
 	/**
 	 * @author acolling
 	 */
-	public class TextFieldUtils {
-		
-		
-		public static function createTextField(multi:Boolean = false, selectable:Boolean = false, width:uint = 100, height:uint = 50 ) : TextField {
+	public class TextFieldUtils  {
+
+		public function TextFieldUtils() {
+			
+			trace("my tf constructed-------");
+		}
+
+
+		public static function createTextField(multi : Boolean = false, selectable : Boolean = false, width : uint = 100, height : uint = 50, styleSheet:StyleSheet = null) : TextField {
 			var textField : TextField = new TextField();
-			textField.selectable = selectable;
+			textField.styleSheet = styleSheet;
 			textField.embedFonts = true;
-			textField.wordWrap = multi;
 			textField.multiline = multi;
-			textField.mouseWheelEnabled = false;
-			textField.antiAliasType = AntiAliasType.ADVANCED;
+			textField.wordWrap = multi;
 			textField.autoSize = TextFieldAutoSize.LEFT;
 			textField.width = width;
 			textField.height = height;
-			
+			textField.selectable = selectable;
+			textField.mouseWheelEnabled = false;
+			textField.antiAliasType = AntiAliasType.ADVANCED;
 			return textField;
 		}
 		
 		
-		public static function createTextFormat(fontName : String, fontColor : Number, fontSize : uint, letterSpacing : int = 0, bold:Boolean = false, leading:int = 0) : TextFormat {
-			var textFormat : TextFormat = new TextFormat (fontName, fontSize, fontColor, bold, null, null, null, null, null, null, null, null, leading);
-			
-			textFormat.letterSpacing = letterSpacing;
-			
-			// textFormat.font = fontName;
-			// textFormat.color = fontColor;
-			// textFormat.bold = bold;
-			// textFormat.size = fontSize;
-			
-			return textFormat;
-		};
 
 		
-		
+		public static function createTextFormat(fontName : String, fontColor : Number, fontSize : uint, letterSpacing : int = 0, bold : Boolean = false, leading : int = 0) : TextFormat {
+			var textFormat : TextFormat = new TextFormat(fontName, fontSize, fontColor, bold, null, null, null, null, null, null, null, null, leading);
+			textFormat.letterSpacing = letterSpacing;
+			return textFormat;
+		}
 	}
 }
