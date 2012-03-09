@@ -1,4 +1,6 @@
 package graphics {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -16,7 +18,50 @@ package graphics {
 			return Math.sin(pointRatio * 2 * Math.PI);
 		}
 
+		public static function getTriangle(p1 : Point, p2 : Point, p3 : Point, joinUp : Boolean, lineCol : int,  thick:uint=1, fillCol: int = 0x0, fillAlpha : Number = 0) : Shape {
+			var s:Shape = new Shape();
+			if (joinUp) s.graphics.beginFill(fillCol, fillAlpha);
+			s.graphics.lineStyle(thick,lineCol);
+			s.graphics.moveTo(p1.x, p1.y);
+			s.graphics.lineTo(p2.x, p2.y);
+		 	s.graphics.lineTo(p3.x, p3.y);
+			if (joinUp){
+				s.graphics.lineTo(p1.x, p1.y);
+				s.graphics.endFill();
+			}
+			return s;
+		}
+
+
 		//
+		public static function cookieCut (objectToShow:DisplayObject, objectToCutOut:DisplayObject):Bitmap
+		{
+			var container:Sprite = new Sprite ();
+
+			var objectToShowBMD:BitmapData = new BitmapData (objectToShow.width, objectToShow.height, true, 0x00000000);
+			objectToShowBMD.draw (objectToShow);
+
+			var objectToShowBitmap:Bitmap = new Bitmap (objectToShowBMD);
+			objectToShowBitmap.x = objectToShow.x;
+			objectToShowBitmap.y = objectToShow.y;
+			container.addChild (objectToShowBitmap);
+
+			var objectToCutOutBMD:BitmapData = new BitmapData (objectToCutOut.width, objectToCutOut.height, true, 0x00000000);
+			objectToCutOutBMD.draw (objectToCutOut);
+
+			var objectToCutOutBitmap:Bitmap = new Bitmap (objectToCutOutBMD);
+			objectToCutOutBitmap.x = objectToCutOut.x;
+			objectToCutOutBitmap.y = objectToCutOut.y;
+			container.addChild (objectToCutOutBitmap);
+
+			var finalBMD:BitmapData = new BitmapData (container.width, container.height, true, 0x00000000);
+			finalBMD.draw (container);
+			finalBMD.floodFill (objectToCutOut.x+(objectToCutOut.width*.5), objectToCutOut.y+(objectToCutOut.height*.5), 0x00000000);
+
+			var finalBitmap:Bitmap = new Bitmap (finalBMD);
+
+			return finalBitmap;
+		}
 		public static function getCirclePoints(radius : Number, sides : uint, centerX : Number = 0, centerY : Number = 0) : Array {
 			var retA : Array = [];
 			for (var i : uint = 0; i <= sides; i++) {
@@ -36,15 +81,14 @@ package graphics {
 			target.y = (parent.height / 2) - (target.height / 2) + parent.y;
 		}
 
-		public static function drawBox(w : int, h : int, fillColor : int, fillAlpha:Number = 1, lineThick:uint = 0, lineCol:int = 0x0, lineAlph:Number = 0 ) : Shape {
-			//todo add option to add as a border (deduct line size from box size)
+		public static function drawBox(w : int, h : int, fillColor : int, fillAlpha : Number = 1, lineThick : uint = 0, lineCol : int = 0x0, lineAlph : Number = 0) : Shape {
+			// todo add option to add as a border (deduct line size from box size)
 			var shape : Shape = new Shape();
 			shape.graphics.lineStyle(lineThick, lineCol, lineAlph);
 			shape.graphics.beginFill(fillColor, fillAlpha);
 			shape.graphics.drawRect(0, 0, w, h);
 			return shape;
 		}
-		
 
 		public static function drawArc(drawObj : Sprite, centerPoint : Point, radius : Number, startAngle : Number, arcAngle : Number, steps : int) : void {
 			var twoPI : Number = 2 * Math.PI;
@@ -184,21 +228,19 @@ package graphics {
 			}
 		}
 
-		public static function drawCircle(radius:int,  color : int) : Shape {
-			var circle:Shape = new Shape();
+		public static function drawCircle(radius : int, color : int) : Shape {
+			var circle : Shape = new Shape();
 			circle.graphics.lineStyle(0);
 			circle.graphics.beginFill(color);
 			circle.graphics.drawCircle(0, 0, radius);
 			return circle;
 		}
 
-		public static function drawLine(vect:Point, thick : int, col : uint) : Shape {
-			
-			var shape:Shape = new Shape();
+		public static function drawLine(vect : Point, thick : int, col : uint) : Shape {
+			var shape : Shape = new Shape();
 			shape.graphics.lineStyle(thick, col);
 			shape.graphics.lineTo(vect.x, vect.y);
 			return shape;
-			
 		}
 	}
 }

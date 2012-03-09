@@ -21,7 +21,7 @@ package utils {
 						test()
 			trace("GridPlacer created");
 ;
-			var t = returnPoint(1)
+			//var t = returnPoint(1)
 		}
 	
 		/*

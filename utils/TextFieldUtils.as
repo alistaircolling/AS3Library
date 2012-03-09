@@ -1,7 +1,6 @@
 package utils {
 	import org.robotlegs.mvcs.Actor;
 	import flash.text.AntiAliasType;
-	import flash.text.StyleSheet;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
