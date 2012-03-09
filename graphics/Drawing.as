@@ -18,7 +18,7 @@ package graphics {
 			return Math.sin(pointRatio * 2 * Math.PI);
 		}
 
-		public static function getTriangle(p1 : Point, p2 : Point, p3 : Point, joinUp : Boolean, lineCol : int,  thick:uint=1, fillCol: int = 0x0, fillAlpha : Number = 0) : Shape {
+		public static function drawTriangle(p1 : Point, p2 : Point, p3 : Point, joinUp : Boolean, lineCol : int,  thick:uint=1, fillCol: int = 0x0, fillAlpha : Number = 0) : Shape {
 			var s:Shape = new Shape();
 			if (joinUp) s.graphics.beginFill(fillCol, fillAlpha);
 			s.graphics.lineStyle(thick,lineCol);
