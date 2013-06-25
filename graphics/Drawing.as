@@ -62,6 +62,22 @@ package graphics {
 
 			return finalBitmap;
 		}
+		
+		public static function giveMeRainbow(_bannerWidth:Number, _bannerHeight:Number) : Shape {
+			var rainbow : Shape = new Shape();
+			var mat : Matrix = new Matrix();
+			var colors : Array = [0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0x0000FF, 0xFF00FF, 0xFF0000];
+			var alphas : Array = [1, 1, 1, 1, 1, 1, 1];
+			// 255/6=42.5, round off is 42. We want to divide 255 long spectrum
+			// into 6 equally spaced pieces to distribute uniformly 7 colors.
+			var ratios : Array = [0, 42, 84, 126, 168, 210, 255];
+			mat.createGradientBox(_bannerWidth, _bannerHeight);
+			rainbow.graphics.lineStyle();
+			rainbow.graphics.beginGradientFill(GradientType.LINEAR, colors, alphas, ratios, mat);
+			rainbow.graphics.drawRect(0, 0, _bannerWidth, _bannerHeight);
+			rainbow.graphics.endFill();
+			return rainbow;
+		}
 		public static function getCirclePoints(radius : Number, sides : uint, centerX : Number = 0, centerY : Number = 0) : Array {
 			var retA : Array = [];
 			for (var i : uint = 0; i <= sides; i++) {
